@@ -11,7 +11,7 @@ namespace HelloWorldApp
         static void Main(string[] args)
         {
             // izsaucam sevis izveidoto funkciju
-            // SayHello();
+            SayHello();
             // izsaucam savu otro izveidoto funkciju
             SayHelloToUser();
         }
