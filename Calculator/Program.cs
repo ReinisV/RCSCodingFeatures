@@ -12,12 +12,59 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            // CalculateCircleArea();
-            // Ctrl + K D
-            // turot Ctrl, spiežam K un tad D
-            CountTwoNumbersTogether();
+            string usersInput = "0";
+            while (true)
+            {
+                Console.WriteLine("please choose action");
+                Console.WriteLine("a - calculate circle area");
+                Console.WriteLine("c - count two numbers together");
+                usersInput = Console.ReadLine();
+                // ja atbilde ir a, tad izsaukt apļa funkciju,
+                // ja atbilde ir c, tad izsaukt saskaitīšanas funkciju,
+                // visos citos gadījumos paradīt kļūdas paziņojumu
+                if (usersInput == "a")
+                {
+                    CalculateCircleArea();
+                }
+                else if (usersInput == "c")
+                {
+                    CountTwoNumbersTogether();
+                }
+                else if (usersInput == "d")
+                {
+                    DoesTheNumberDivide();
+                }
+                else if (usersInput == "x")
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, did not understand");
+                }
+                
+                Console.ReadLine();
+            }
         }
 
+        // semikolu aiz funkcijas definīcijas neliek, jo netiek veikta nekāda darbība,
+        // vienkārši ir pateikts ka šī būs funkcija
+        static void DoesTheNumberDivide()
+        {
+            double dalāmais = GetNumberFromUser("lūdzu ievadiet dalāmo");
+            double dalitājs = GetNumberFromUser("lūdzu ievadiet dalītāju");
+            double modulo = dalāmais % dalitājs;
+            if (modulo == 0)
+            {
+                Console.WriteLine("šie skaitļi dalās");
+            }
+            else
+            {
+                Console.WriteLine("nedalās");
+            }
+        }
+
+        // void nozīmē to, ka šī funkcija rezultātā neko neatgriež tajā vietā kur tā ir izsaukta
         static void CountTwoNumbersTogether()
         {
             // izveidojam mainīgo, kur glabāt lietotāja ievadīto pirmo skaitli
