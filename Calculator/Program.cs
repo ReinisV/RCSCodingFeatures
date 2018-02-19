@@ -108,7 +108,7 @@ namespace Calculator
             double parsedNumber;
             // pārveidojam ievadīto tekstu par skaitli un ierakstam mainīgajā
             bool parseWasSuccess = double.TryParse(textInput, out parsedNumber);
-            if (parseWasSuccess == false)
+            if (!parseWasSuccess)
             {
                 Console.WriteLine("slikti ievadīts skaitlis \"" + textInput + "\"");
                 Console.WriteLine("ievadi skaitli vēlreiz");
