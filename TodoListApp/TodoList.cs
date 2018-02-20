@@ -12,10 +12,11 @@ namespace TodoListApp
         // saucas tāpat, kā klase
         public TodoList()
         {
-            todoEntries = new List<string>();
+            todoEntries = new List<TodoListEntry>();
         }
 
-        List<string> todoEntries;
+        List<TodoListEntry> todoEntries;
+        string pathToTodoFile = @"C:\Users\reinis.vesers\Documents\TodoApplicationSettings\todos.txt";
 
         public void AddNewTodo(string task)
         {
@@ -36,7 +37,7 @@ namespace TodoListApp
 
             for (int i = 0; i < todoEntries.Count; i++)
             {
-                Console.WriteLine((i + 1) + ". " + todoEntries[i]);
+                Console.WriteLine((i + 1) + ".  " + todoEntries[i]);
                 Console.WriteLine();
             }
         }
@@ -63,19 +64,27 @@ namespace TodoListApp
 
         public void SaveToFile()
         {
+            File.Delete(pathToTodoFile);
             // Ctrl + .
             for(int i = 0; i < todoEntries.Count; i++)
             {
                 // Append (angļu val) - Pievienot, papildināt
-                File.AppendAllText(
-                    @"C:\Users\reinis.vesers\Documents\TodoApplicationSettings\todos.txt",
-                    todoEntries[i] + "\r\n");
+                File.AppendAllText(pathToTodoFile, todoEntries[i] + "\r\n");
             }
         }
 
         public void LoadFromFile()
         {
-            string[] allLinesFromFile = File.ReadAllLines(@"C:\Users\reinis.vesers\Documents\TodoApplicationSettings\todos.txt");
+            // ja funkcija, kas pārbauda vai fails eksistē, atgriež false (tātad neeksistē)
+            if (!File.Exists(pathToTodoFile))
+            {
+                // tad pārtraucam LoadFromFile un atgriežamies atpakaļ
+                return;
+            }
+            
+            // citādāk, nolasam faila saturu pa rindām
+            string[] allLinesFromFile = File.ReadAllLines(pathToTodoFile);
+            
             foreach (string listEntry in allLinesFromFile)
             {
                 todoEntries.Add(listEntry);

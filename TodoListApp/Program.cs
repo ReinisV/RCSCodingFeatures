@@ -14,19 +14,22 @@ namespace TodoListApp
             while (true)
             {
                 Console.WriteLine("lūdzu izvēlēties darbību:");
-                Console.WriteLine("a - pievienot");
+                Console.WriteLine("a, add, pievienot - pievienot");
                 Console.WriteLine("p - parādīt");
                 Console.WriteLine("d - dzēst");
                 Console.WriteLine("dv - dzēst visu");
                 string usersInput = Console.ReadLine();
                 switch (usersInput)
                 {
+                    case "pievienot":
+                    case "add":
                     case "a":
                         // pievienot jaunu darāmo lietu
                         Console.WriteLine("lūdzu ievadiet darāmo lietu:");
                         string todoTask = Console.ReadLine();
                         list.AddNewTodo(todoTask);
                         break;
+                    case "print":
                     case "p":
                         // izvadīt visas darāmās lietas uz ekrāna
                         list.ShowAllTodos();
@@ -52,6 +55,9 @@ namespace TodoListApp
                     case "l":
                         // implementējam ielādi no faila izmantojot funkciju
                        list.LoadFromFile();
+                        break;
+                    default:
+                        Console.WriteLine("neatpazīta komanda");
                         break;
                 }
             }
