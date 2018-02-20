@@ -24,7 +24,12 @@ namespace TodoListApp
             // tad uzspiežam uz klases nosaukuma un
             // piespiežam Ctrl + .
             Console.WriteLine("uzdevums pievienots:" + task);
-            todoEntries.Add(task);
+            // izveidojam jaunu uzdevumu
+            TodoListEntry usersTodo = new TodoListEntry();
+            // jaunizveidotajam uzdevumam piešķiram nosaukumu, ko ievadījis lietotājis
+            usersTodo.Name = task;
+            // pievienojam jauno uzdevumu mūsu uzdevumu sarakstam
+            todoEntries.Add(usersTodo);
         }
         
 
@@ -37,7 +42,16 @@ namespace TodoListApp
 
             for (int i = 0; i < todoEntries.Count; i++)
             {
-                Console.WriteLine((i + 1) + ".  " + todoEntries[i]);
+                // izvadām kārtas numuru un uzdevuma nosaukumu (bet bez enter galā)
+                Console.Write((i + 1) + ".  " + todoEntries[i].Name);
+                // ja uzdevums ir pabeigts (IsCompleted == true)
+                if (todoEntries[i].IsCompleted)
+                {
+                    // tad uzrakstam uz ekrāna "DONE" (bet bez enter)
+                    Console.Write(" DONE");
+                }
+
+                // nospiežam enter
                 Console.WriteLine();
             }
         }
@@ -69,7 +83,10 @@ namespace TodoListApp
             for(int i = 0; i < todoEntries.Count; i++)
             {
                 // Append (angļu val) - Pievienot, papildināt
-                File.AppendAllText(pathToTodoFile, todoEntries[i] + "\r\n");
+                string nameOfTodo = todoEntries[i].Name;
+                File.AppendAllText(pathToTodoFile, nameOfTodo + "\r\n");
+                bool xxxx = todoEntries[i].IsCompleted;
+                File.AppendAllText(pathToTodoFile, xxxx + "\r\n");
             }
         }
 
@@ -85,10 +102,26 @@ namespace TodoListApp
             // citādāk, nolasam faila saturu pa rindām
             string[] allLinesFromFile = File.ReadAllLines(pathToTodoFile);
             
-            foreach (string listEntry in allLinesFromFile)
+            // dodamies cauri sarakstam ar teksta rindām, kas ir ielādētas no faila
+            for (var index = 0; index < allLinesFromFile.Length; index += 2)
             {
-                todoEntries.Add(listEntry);
+                string listEntry = allLinesFromFile[index];
+                // listEntry mainīgajā ir ierakstīta viena teksta rinda no faila
+                // izveidojam jaunu uzdevumu
+                TodoListEntry fileTodo = new TodoListEntry();
+                // uzdevumam uzdodam par nosaukumu teksta rindu, kas nolasīta no faila
+                fileTodo.Name = listEntry;
+                // uzdevumam uzdodam par izpildes stāvokli vērtību, kas nolasīta no faila
+                fileTodo.IsCompleted = bool.Parse(allLinesFromFile[index + 1]);
+                // jaunizveidoto uzdevumu pievienojam kopējo uzdevumu sarakstam
+                this.todoEntries.Add(fileTodo);
             }
+        }
+
+        public void MarkTodoAsDone(int doneTodoIndex)
+        {
+            TodoListEntry doneTodo = todoEntries[doneTodoIndex];
+            doneTodo.IsCompleted = true;
         }
     }
 }

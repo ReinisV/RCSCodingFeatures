@@ -8,8 +8,8 @@ namespace TodoListApp
 {
     class TodoListEntry
     {
-        string Name;
+        public string Name;
 
-        bool IsCompleted;
+        public bool IsCompleted;
     }
 }

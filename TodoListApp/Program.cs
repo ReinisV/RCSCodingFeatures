@@ -41,6 +41,13 @@ namespace TodoListApp
                         int index = int.Parse(Console.ReadLine());
                         list.DeleteTodo(index - 1);
                         break;
+                    case "at":
+                        // atzīmējam uzdevumu kā izdarītu
+                        Console.WriteLine("lūdzu ievadi paveiktā uzdevuma numuru");
+                        list.ShowAllTodos();
+                        int doneTodoIndex = int.Parse(Console.ReadLine());
+                        list.MarkTodoAsDone(doneTodoIndex - 1);
+                        break;
                     case "dv":
                         // lai ātri orientētos pa kodu,
                         // iespējams uzspiest F12 uz funkcijas, lai uzreiz
