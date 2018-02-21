@@ -102,6 +102,9 @@ namespace TodoListApp
             // citādāk, nolasam faila saturu pa rindām
             string[] allLinesFromFile = File.ReadAllLines(pathToTodoFile);
             
+            // pirms saraksta ielādes no faila, to iztīram no vecā satura
+            todoEntries.Clear();
+
             // dodamies cauri sarakstam ar teksta rindām, kas ir ielādētas no faila
             for (var index = 0; index < allLinesFromFile.Length; index += 2)
             {
