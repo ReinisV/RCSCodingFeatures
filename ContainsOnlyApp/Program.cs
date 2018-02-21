@@ -34,6 +34,7 @@ namespace ContainsOnlyApp
                         hasInvalidLetterBeenFound = true;
                     }
                 }
+
                 // PĀRBAUDĀM, VAI VISI VĀRDNĪCAS VĀRDA BURTI ATRODAMI LIETOTĀJA IEVADĪTAJĀ VĀRDĀ
                 // izmantojot ciklu, apstrādājam katru burtu vārdnīcas vārdā
                 foreach (char symbol in wordFromDict)
