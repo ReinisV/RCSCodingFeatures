@@ -6,5 +6,11 @@
     sludinājuma -->
 @foreach(var ad in Model)
 {
-    <p>@ad.Name - @ad.Price eur</p> <a href="/Home/Advert?advertId=@ad.AdvertId">atvērt sludinājumu</a>
+    <p>
+        <a href="/Home/Advert?advertId=@ad.AdvertId">
+            @ad.Name - @ad.Price eur
+        </a>
+    </p> 
 }
+
+@Html.ActionLink("pievienot jaunu sludinājumu", "CreateAdvert")

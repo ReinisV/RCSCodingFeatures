@@ -1,0 +1,23 @@
+﻿@model AdvertsWebApp.Models.Advert
+<h2>Izveidot sludinājumu</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div>
+        <label>sludinājuma nosaukums</label>
+        @Html.EditorFor(model => model.Name)
+    </div>
+
+    <div>
+        <label>sludinājuma teksts</label>
+        @Html.EditorFor(model => model.AdvertText)
+    </div>
+
+    <div>
+        <label>sludinājuma cena</label>
+        @Html.EditorFor(model => model.Price)
+    </div>
+
+    <input type="submit" value="Saglabāt šo sludinājumu" />
+}

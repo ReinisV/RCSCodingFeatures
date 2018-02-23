@@ -12,27 +12,11 @@ namespace AdvertsWebApp.Controllers
     {
         public HomeController()
         {
-            adverts = new List<Advert>();
-
-            Advert ad = new Advert();
-            ad.AdvertId = 1;
-            ad.Name = "bmw";
-            ad.AdvertText = "šis ir labs BMW";
-            ad.Price = 2000.95;
-            ad.CreationTime = DateTime.Now;
-
-            Advert homeAd = new Advert();
-            homeAd.AdvertId = 2;
-            homeAd.Name = "māja";
-            homeAd.AdvertText = "liela māja";
-            homeAd.Price = 12000;
-            homeAd.CreationTime = new DateTime(1999, 12, 31);
-
-            adverts.Add(ad);
-            adverts.Add(homeAd);
+            advertDb = new AdvertDb();
         }
 
         private List<Advert> adverts;
+        private AdvertDb advertDb;
 
         // šī funkcija tiek izsaukta, kad tiek pieprasīts weblapas bāzes ceļš
         // GET: Home (piemēram www.ss.lv)
@@ -41,7 +25,7 @@ namespace AdvertsWebApp.Controllers
             // izsaucam View() funkciju, lai uzģenerētu html rezultātu
             // no mūsu Index.cshtml faila, tajā iekšā izmantojot datus,
             // kas pieejami adverts sarakstā
-            return View(adverts);
+            return View(advertDb.Adverts.ToList());
         }
 
         public ActionResult Advert(int advertId)
@@ -60,5 +44,21 @@ namespace AdvertsWebApp.Controllers
 
             return View();
         }
+        
+        public ActionResult CreateAdvert()
+        {
+            return View();
+        }
+
+        // šis atribūts norāda, ka šo funkciju iespējams izsaukt ar POST vaicājumu
+        // t. i., iespējams atsūtīt viņai datus no formas
+        [HttpPost]
+        public ActionResult CreateAdvert(Advert advert)
+        {
+            adverts.Add(advert);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
